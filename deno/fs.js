@@ -1,5 +1,5 @@
 {
-  var fs, permission;
+  var fs;
   if (!fs) {
     fs = await showDirectoryPicker({
       mode: 'readwrite'
