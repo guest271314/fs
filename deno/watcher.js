@@ -1,3 +1,4 @@
+// ./deno run -A watcher.js
 const file = 'input.js';
 
 console.log(`Watching ${file}`);
