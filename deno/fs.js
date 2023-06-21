@@ -43,7 +43,7 @@ It’s like they say - if the system fails you, you create your own system.
 1. If a (logical or axiomatic formal) system is consistent, it cannot be complete.
 2. The consistency of axioms cannot be proved within their own system.
 
-- Kurt Gödel, Incompvareness Theorem, On Formally Undecidable Propositions of Principia Mathematica and Related Systems`;
+- Kurt Gödel, Incompleteness Theorem, On Formally Undecidable Propositions of Principia Mathematica and Related Systems`;
 
   await new Blob([`const command = new Deno.Command("espeak-ng", {
   args: [
