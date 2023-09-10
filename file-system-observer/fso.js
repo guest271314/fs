@@ -3,17 +3,6 @@ var {
   writable
 } = new TransformStream();
 
-readable.pipeThrough(new TextDecoderStream()).pipeTo(
-  new WritableStream({
-    write(value) {
-      console.log(value);
-    },
-    close() {
-      console.log('Stream closed');
-    }
-  })
-);
-
 var handle = await showSaveFilePicker({
   multiple: 'false',
   types: [{
@@ -51,11 +40,24 @@ var fileStream = async (changedHandle, type = '') => {
   }
 }
 
-try {
-  await fileStream(handle);
-} catch (e) {
-  console.log(e);
-}
+readable.pipeThrough(new TextDecoderStream()).pipeTo(
+  new WritableStream({
+    async start() {
+      try {
+        return fileStream(handle);
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
+    },
+    write(value) {
+      console.log(value);
+    },
+    close() {
+      console.log('Stream closed');
+    }
+  })
+).catch(console.error);
 
 var fso = new FileSystemObserver(async ([{
   changedHandle,
