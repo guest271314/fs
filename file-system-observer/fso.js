@@ -1,5 +1,3 @@
-var decoder = new TextDecoder();
-
 var {
   readable,
   writable
@@ -33,7 +31,7 @@ var status = await handle.requestPermission({
   mode: "readwrite"
 });
 
-var fn = async (changedHandle, type = 'modify') => {
+var fileStream = async (changedHandle, type = '') => {
   try {
     var {
       size
@@ -54,7 +52,7 @@ var fn = async (changedHandle, type = 'modify') => {
 }
 
 try {
-  await fn(handle);
+  await fileStream(handle);
 } catch (e) {
   console.log(e);
 }
@@ -66,7 +64,7 @@ var fso = new FileSystemObserver(async ([{
 }], record) => {
 
   try {
-    await fn(handle, type);
+    await fileStream(handle, type);
   } catch (e) {
     console.log(e);
   }
