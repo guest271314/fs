@@ -14,7 +14,7 @@ stdout.pipeThrough(new TextDecoderStream()).pipeTo(
     async write(value) {
       console.log(value);
       if (value === "Z") {
-        new Blob([]).stream().pipeTo(await output.createWritable());
+        await new Blob([]).stream().pipeTo(await output.createWritable());
       }
     },
   }),
@@ -24,7 +24,7 @@ var fso = new FileSystemObserver(
   async ([{ changedHandle, root, type }], record) => {
     try {
       if (type === "modified") {
-        new Response(await(await output.getFile()).arrayBuffer()).body.pipeTo(stdin, {
+        await new Response(await(await output.getFile()).arrayBuffer()).body.pipeTo(stdin, {
           preventClose: true
         });
       }
