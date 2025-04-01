@@ -17,9 +17,10 @@ async function repl(script, fs) {
         readWrites = 0;
         const text = await (await changedHandle.getFile()).text();
         fso.unobserve(fs);
-        await (await changedHandle.createWritable({ keepExistingData: false }))
-          .close();
         fso.disconnect();
+        const currentHandle = await changedHandle.createWritable({ keepExistingData: false })
+        await currentHandle.truncate(0);
+        await currentHandle.close();
         resolve(text);
       }
     } catch (e) {
