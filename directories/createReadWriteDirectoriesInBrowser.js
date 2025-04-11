@@ -1,3 +1,4 @@
+// https://gist.github.com/guest271314/78372b8f3fabb1ecf95d492a028d10dd
 // *Mostly* specfication conformant
 // <input type="file" webkitdirectory> does not upload empty directories
 // drop event with DataTransfer.item.getAsFileSystemDirectory() *does*
